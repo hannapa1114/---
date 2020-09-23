@@ -1,26 +1,53 @@
-var express = require('express');
-var cookieParser = require('cookie-parser');
-var morgan = require('morgan');
+//declare Express
+const express = require('express');
 
-//
-var usersRouter = require('./routes/users');
+//express와 mysql 연결(1) // ???
+const sequelize = require('./models/index').sequelize;
 
-var app = express();
+//middleware
+const bodyparser = require('body -parser');
+const session = require('express-session');
+const cors = require('cors');
+const cookieparser = require('cookie-parser');
+const morgan = require('morgan')
 
-const port = 3000;
+//Routes
+const userRouter = require('./routes/user')
+const dessertRouter = require('./routes/dessert')
+const commentRouter = require('./routes/comment')
+const searchRouter = require('./routes/search')
 
-app.use(morgan('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+const app = express()
+// const port = 4000;
 
-// Router
-app.use('/users', usersRouter);
+//express와 mysql 연결()
+sequelize.sync()
 
-app.listen(port, () => {
-  console.log("connected", port);
+//use middleware
+app.use(bodyparser.json());
+app.use(cors({
+    origin: ['http://localhost:3000'],
+    // method: ['GET', 'POST'],
+    credentials: true
+}))
+app.use(morgan('dev'))
+app.use(session({ // 세션을 관리하기 위해 필요한 미들웨어.
+    secret : 'Secret Key',
+    resave: true,
+    saveUninitialized: true
+}))
+app.use(cookieparser()) //요청된 쿠키를 쉽게 추출할 수 있도록 해주는 미들웨어.
+
+
+app.get('/', (req,res) => {
+    res.status(200).send('Success!')
 })
 
-module.exports = app;
+app.use('/user', userRouter)
+app.use('/dessert', dessertRouter)
+app.use('/comment', commentRouter)
+app.use('/search', searchRouter)
 
-// test  dev 이하 feature/basic_server
+app.listen(4000,() => {
+    console.log('데이터베이스 연결 성공');
+})
