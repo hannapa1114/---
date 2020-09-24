@@ -1,24 +1,24 @@
-require("dotenv").config();
+require('dotenv').config();
 
-module.exports = 
+module.exports =
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": process.env.DATABASE_PASSWORD,
     "database": "Chaegjango",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": process.env.DATABASE_PASSWORD,
     "database": "Chaegjango",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": null,
+    "password": process.env.DATABASE_PASSWORD,
     "database": "Chaegjango",
     "host": "127.0.0.1",
     "dialect": "mysql"
