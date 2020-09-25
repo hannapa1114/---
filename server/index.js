@@ -4,11 +4,13 @@ const express = require('express');
 //middleware
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
-const session = require('express-session');
+// const session = require('express-session');
 const cors = require('cors');
+// const jwt = require('jsonwebtoken');
 
 //Routes
 const usersRouter = require('./routes/users');
+const linkRouter = require('./routes/links');
 
 const app = express();
 const port = 4000;
@@ -23,11 +25,12 @@ app.use(cors({
   method: ['GET', 'POST'],
   credentials: true
 }))
-app.use(session({ // 세션을 관리하기 위해 필요한 미들웨어.
-  secret : 'Fantastic Four',
-  resave: true,
-  saveUninitialized: true
-}))
+
+// app.use(session({ // 토큰개념, 세션을 관리하기 위해 필요한 미들웨어.
+//   secret : 'Fantastic Four',
+//   resave: true,
+//   saveUninitialized: true
+// }))
 
 
 app.get('/', (req,res) => {
@@ -36,7 +39,7 @@ app.get('/', (req,res) => {
 
 // Router
 app.use('/users', usersRouter);
-
+app.use('/links', linkRouter);
 
 app.listen(port, () => {
   console.log("connected", port);
