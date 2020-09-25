@@ -11,6 +11,7 @@ const cors = require('cors');
 //Routes
 const usersRouter = require('./routes/users');
 const linkRouter = require('./routes/links');
+const searchRouter = require('./routes/search');
 
 const app = express();
 const port = 4000;
@@ -32,7 +33,6 @@ app.use(cors({
 //   saveUninitialized: true
 // }))
 
-
 app.get('/', (req,res) => {
   res.status(200).send('Success!')
 })
@@ -40,6 +40,8 @@ app.get('/', (req,res) => {
 // Router
 app.use('/users', usersRouter);
 app.use('/links', linkRouter);
+app.use('/search', searchRouter);
+
 
 app.listen(port, () => {
   console.log("connected", port);
