@@ -9,6 +9,7 @@ const cors = require('cors');
 
 //Routes
 const usersRouter = require('./routes/users');
+const searchRouter = require('./routes/search');
 
 const app = express();
 const port = 4000;
@@ -29,14 +30,13 @@ app.use(session({ // 세션을 관리하기 위해 필요한 미들웨어.
   saveUninitialized: true
 }))
 
-
 app.get('/', (req,res) => {
   res.status(200).send('Success!')
 })
 
 // Router
 app.use('/users', usersRouter);
-
+app.use('/search', searchRouter);
 
 app.listen(port, () => {
   console.log("connected", port);
