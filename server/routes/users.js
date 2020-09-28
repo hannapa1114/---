@@ -10,4 +10,7 @@ router.post("/signin", usersController.signin.post);
 // * POST /user/signup
 router.post("/signup", usersController.signup.post);
 
+// * POST /user/mypage
+router.post('/mypage', usersController.mypage.post);
+
 module.exports = router;
