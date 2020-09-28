@@ -1,4 +1,5 @@
 const { user } = require("../../models");
+
 const jwt = require('jsonwebtoken');
 
 module.exports = {
@@ -35,3 +36,4 @@ module.exports = {
 
 // 토큰 인증을 확인하는 함수를 만든다.
 // c 에서 받은 토큰이 유효한 토큰인지 확인하는 함수를 만든다
+
