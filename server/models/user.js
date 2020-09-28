@@ -1,7 +1,9 @@
 "use strict";
 const crypto = require("crypto");
 module.exports = (sequelize, DataTypes) => {
-  const user = sequelize.define("user", {
+  const user = sequelize.define(
+    "user",
+    {
       email: {
         type: DataTypes.STRING,
         validate: { isEmail: true },

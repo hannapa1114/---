@@ -11,6 +11,9 @@ router.post("/signin", usersController.signin.post);
 router.post("/signup", usersController.signup.post);
 
 // * POST /user/mypage
-router.post('/mypage', usersController.mypage.post);
+router.post("/mypage", usersController.mypage.post);
+
+// * POST /user/changePassword
+router.post("/changePassword", usersController.changepassword.post);
 
 module.exports = router;
