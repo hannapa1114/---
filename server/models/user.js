@@ -1,25 +1,34 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const crypto = require("crypto");
 module.exports = (sequelize, DataTypes) => {
-  class user extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+  const user = sequelize.define("user", {
+      email: {
+        type: DataTypes.STRING,
+        validate: { isEmail: true },
+      },
+      username: DataTypes.STRING,
+      password: DataTypes.STRING,
+    },
+    {
+      hooks: {
+        beforeCreate: (data, option) => {
+          var shasum = crypto.createHmac("sha512", "thisismysecretkey");
+          shasum.update(data.password);
+          data.password = shasum.digest("hex");
+        },
+        beforeFind: (data, option) => {
+          if (data.where.password) {
+            var shasum = crypto.createHmac("sha512", "thisismysecretkey");
+            shasum.update(data.where.password);
+            data.where.password = shasum.digest("hex");
+          }
+        },
+      },
     }
+  );
+  user.associate = function (models) {
+    // associations can be defined here
   };
-  user.init({
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'user',
-  });
+
   return user;
 };
