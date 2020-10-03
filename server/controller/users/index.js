@@ -4,4 +4,6 @@ module.exports = {
   signup: require("./signup"),
   mypage: require("./mypage"),
   changepassword: require("./changepassword"),
+  mybook: require("./mybook"),
+
 };
