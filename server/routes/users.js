@@ -19,5 +19,7 @@ router.post("/changePassword", usersController.changepassword.post);
 // * GET /user/mybook
 router.get("/mybook", usersController.mybook.get);
 
+// * POST /user/bookdetail
+router.post("/bookdetail", usersController.bookdetail.post);
 
 module.exports = router;
