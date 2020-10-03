@@ -11,7 +11,9 @@ router.post("/signin", usersController.signin.post);
 router.post("/signup", usersController.signup.post);
 
 // * POST /user/mypage
-router.post('/mypage', usersController.mypage.post);
+router.post("/mypage", usersController.mypage.post);
 
+// * GET /user/mybook
+router.get("/mybook", usersController.mybook.get);
 
 module.exports = router;

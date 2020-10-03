@@ -2,5 +2,6 @@ module.exports = {
   signin: require("./signin"),
   // signout: require('./signout'),
   signup: require("./signup"),
-  mypage: require('./mypage'),
+  mypage: require("./mypage"),
+  mybook: require("./mybook"),
 };
