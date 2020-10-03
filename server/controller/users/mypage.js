@@ -15,7 +15,7 @@ module.exports = {
       })
       .then((data) => {
         if (!data) {
-          return res.status(404).send("incorrected password");
+          return res.status(404).send("incorrect password");
         } else {
           return res.status(200).send("success");
         }
