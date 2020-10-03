@@ -13,7 +13,11 @@ router.post("/signup", usersController.signup.post);
 // * POST /user/mypage
 router.post("/mypage", usersController.mypage.post);
 
+// * POST /user/changePassword
+router.post("/changePassword", usersController.changepassword.post);
+
 // * GET /user/mybook
 router.get("/mybook", usersController.mybook.get);
+
 
 module.exports = router;
