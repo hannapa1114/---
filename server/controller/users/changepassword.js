@@ -8,6 +8,7 @@ module.exports = {
     const decoded_data = jwt.verify(token, "secret_key");
     let { password } = req.body;
 
+    //비밀번호 변경시 재암호화 후 저장
     const shasum = crypto.createHmac("sha512", "thisismysecretkey");
     shasum.update(password);
     password = shasum.digest("hex");
