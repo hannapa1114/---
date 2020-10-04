@@ -1,6 +1,6 @@
 const { user } = require("../../models");
 
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   post: (req, res) => {
@@ -17,8 +17,8 @@ module.exports = {
         if (!data) {
           return res.status(404).send("unvalid user");
         } else {
-          let token = jwt.sign({data: email}, "secret_key");
-          res.status(200).json({token: token});
+          let token = jwt.sign({ data: email, userId: data.id }, "secret_key");
+          res.status(200).json({ token: token });
         }
       })
       .catch((err) => {
