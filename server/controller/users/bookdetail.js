@@ -24,4 +24,22 @@ module.exports = {
         throw err;
       });
   },
+  get: (req, res) => {
+    const { title } = req.body;
+    const { token } = req.headers;
+    const decoded_data = jwt.verify(token, "secret_key");
+
+    book
+      .findeOne({
+        where: {
+          userId: decoded_data.userId,
+          title: title,
+        },
+      })
+      .then((data) => {
+        const exComment = data.comment;
+        res.status(200).send(exComment);
+      })
+      .catch((error) => console.log(error));
+  },
 };
