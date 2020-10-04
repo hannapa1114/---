@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   post: (req, res) => {
     const { title, comment } = req.body;
+    const { token } = req.headers;
     const decoded_data = jwt.verify(token, "secret_key");
 
     book
