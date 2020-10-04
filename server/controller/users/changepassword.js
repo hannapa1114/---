@@ -7,12 +7,14 @@ module.exports = {
     const { token } = req.headers;
     const decoded_data = jwt.verify(token, "secret_key");
     let { password } = req.body;
-
-    //비밀번호 변경시 재암호화 후 저장
+   
     const shasum = crypto.createHmac("sha512", "thisismysecretkey");
     shasum.update(password);
     password = shasum.digest("hex");
 
+    user.findOne({where: {email: decoded_data.data} })
+	  .then(data => {
+		  if(data.dataValues.password !== password) {
     user
       .update(
         { password: password },
@@ -28,5 +30,9 @@ module.exports = {
       .catch((err) => {
         throw err;
       });
-  },
+		  } else {
+			  res.status(409).send("input same password!")
+		  }
+	  })
+		  },
 };
