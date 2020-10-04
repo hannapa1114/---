@@ -1,14 +1,17 @@
 const { book } = require("../../models");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   post: (req, res) => {
-    const { userId, title, comment } = req.body;
+    const { title, comment } = req.body;
+    const decoded_data = jwt.verify(token, "secret_key");
+
     book
       .update(
         { comment: comment },
         {
           where: {
-            userId: userId,
+            userId: decoded_data.userId,
             title: title,
           },
         }
