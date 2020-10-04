@@ -1,4 +1,4 @@
-const { user } = require("../../models");
+const { book } = require("../../models");
 const jwt = require("jsonwebtoken");
 
 module.exports = {
@@ -6,18 +6,17 @@ module.exports = {
     const { token } = req.headers;
     const decoded_data = jwt.verify(token, "secret_key");
     const { password } = req.body;
-    user
-      .findOne({
+    book
+      .findAndCountAll({
         where: {
-          email: decoded_data.data,
-          password: password,
+          userId: decoded_data.userId,
         },
       })
       .then((data) => {
         if (!data) {
-          return res.status(404).send("incorrect password");
+          return res.status(404).send("no book");
         } else {
-          return res.status(200).send("success");
+          return res.status(200).json({ count:data.count});
         }
       });
   },
