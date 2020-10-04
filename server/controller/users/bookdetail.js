@@ -24,7 +24,8 @@ module.exports = {
         throw err;
       });
   },
-  post: (req, res) => {
+
+  take: (req, res) => {
     const { title } = req.body;
     const { token } = req.headers;
     const decoded_data = jwt.verify(token, "secret_key");
@@ -37,8 +38,27 @@ module.exports = {
         },
       })
       .then((data) => {
-	      console.log(data.dataValues.comment)
         res.status(200).send(data.dataValues.comment);
+      })
+      .catch((error) => console.log(error));
+  },
+  fix: (req, res) => {
+    const { title, comment } = req.body;
+    const { token } = req.headers;
+    const decoded_data = jwt.verify(token, "secret_key");
+
+    book
+      .update(
+        { comment: comment },
+        {
+          where: {
+            userId: decoded_data.userId,
+            title: title,
+          },
+        }
+      )
+      .then(() => {
+        res.status(200).send("changed successfully");
       })
       .catch((error) => console.log(error));
   },

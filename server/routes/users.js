@@ -22,7 +22,11 @@ router.get("/mybook", usersController.mybook.get);
 // * POST /user/bookdetail
 router.post("/bookdetail", usersController.bookdetail.post);
 
-// * POST /user/getcomment
-router.post("/getcomment", usersController.bookdetail.post);
+// * POST /user/bookdetail
+router.post("/getcomment", usersController.bookdetail.take);
+
+// *POST /user/bookdetail
+router.post("/changecomment", usersController.bookdetail.fix);
+
 
 module.exports = router;

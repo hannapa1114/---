@@ -5,7 +5,8 @@ module.exports = {
   get: (req, res) => {
     const { token } = req.headers;
     const decoded_data = jwt.verify(token, "secret_key");
-    book
+
+    const { password } = req.body;
       .findAndCountAll({
         where: {
           userId: decoded_data.userId,
