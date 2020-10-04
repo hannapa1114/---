@@ -24,6 +24,7 @@ module.exports = {
         throw err;
       });
   },
+
   take: (req, res) => {
     const { title } = req.body;
     const { token } = req.headers;

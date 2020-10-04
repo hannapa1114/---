@@ -2,11 +2,11 @@ const { book } = require("../../models");
 const jwt = require("jsonwebtoken");
 
 module.exports = {
-  post: (req, res) => {
+  get: (req, res) => {
     const { token } = req.headers;
     const decoded_data = jwt.verify(token, "secret_key");
+
     const { password } = req.body;
-    book
       .findAndCountAll({
         where: {
           userId: decoded_data.userId,

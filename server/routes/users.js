@@ -10,8 +10,8 @@ router.post("/signin", usersController.signin.post);
 // * POST /user/signup
 router.post("/signup", usersController.signup.post);
 
-// * POST /user/mypage
-router.post("/mypage", usersController.mypage.post);
+// * GET /user/mypage
+router.get("/mypage", usersController.mypage.get);
 
 // * POST /user/changePassword
 router.post("/changePassword", usersController.changepassword.post);
@@ -27,5 +27,6 @@ router.post("/getcomment", usersController.bookdetail.take);
 
 // *POST /user/bookdetail
 router.post("/changecomment", usersController.bookdetail.fix);
+
 
 module.exports = router;
