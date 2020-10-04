@@ -18,7 +18,7 @@ module.exports = {
           return res.status(404).send("unvalid user");
         } else {
           let token = jwt.sign({ data: email, userId: data.id }, "secret_key");
-          res.status(200).json({ token: token });
+          res.status(200).json({ token: token, username: data.username });
         }
       })
       .catch((err) => {
