@@ -17,10 +17,11 @@ module.exports =
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
+    "username": "admin",
     "password": process.env.DATABASE_PASSWORD,
     "database": "Chaegjango",
-    "host": "127.0.0.1",
+    "host": "chaegjango.cyil27xtrdkk.ap-northeast-2.rds.amazonaws.com",
+    "port": process.env.PORT,  
     "dialect": "mysql"
   }
 }

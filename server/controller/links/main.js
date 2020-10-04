@@ -12,7 +12,6 @@ module.exports = {
     }  
   })
   .then(data => {
-    console.log('data: ', data);
     res.status(200).json({data: data.username});
   })
   .catch((err) => {

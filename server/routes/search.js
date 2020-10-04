@@ -5,8 +5,8 @@ require('dotenv').config();
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
 
-router.get('/', function (req, res) {
-   const api_url = 'https://openapi.naver.com/v1/search/book.json?query=' + encodeURI(req.query.query); // json 결과
+router.post('/', function (req, res) {
+   const api_url = 'https://openapi.naver.com/v1/search/book.json?query=' + encodeURI(req.body.value); // json 결과
    const request = require('request');
    const options = {
        url: api_url,
