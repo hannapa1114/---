@@ -1,26 +1,22 @@
-const { user } = require("../../models");
-const jwt = require('jsonwebtoken');
+const { book } = require("../../models");
 
 module.exports = {
   post: (req, res) => {
-    const { email, password } = req.body;
+    const { title, author, image, comment, userId } = req.body;
 
-    user
-      .findOne({
-        where: {
-          email: email,
-          password: password,
-        },
+    book
+      .create({
+        title: title,
+        author: author,
+        image: image,
+        comment: comment,
+        userId: userId,
       })
-      .then((data) => {
-        if (!data) {
-          return res.status(404).send("unvalid user");
-        } else {
-          return res.status(200).send("success!");
-        }
+      .then(() => {
+        res.status(200).send("save book success!");
       })
       .catch((err) => {
-        res.status(404).send(err);
+        res.status(500).send(err);
       });
   },
 };
