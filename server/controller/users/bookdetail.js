@@ -24,21 +24,21 @@ module.exports = {
         throw err;
       });
   },
-  get: (req, res) => {
+  post: (req, res) => {
     const { title } = req.body;
     const { token } = req.headers;
     const decoded_data = jwt.verify(token, "secret_key");
 
     book
-      .findeOne({
+      .findOne({
         where: {
           userId: decoded_data.userId,
           title: title,
         },
       })
       .then((data) => {
-        const exComment = data.comment;
-        res.status(200).send(exComment);
+	      console.log(data.dataValues.comment)
+        res.status(200).send(data.dataValues.comment);
       })
       .catch((error) => console.log(error));
   },

@@ -1,7 +1,9 @@
 const { book } = require("../../models");
+const jwt = require("jsonwebtoken")
 
 module.exports = {
   post: (req, res) => {
+    const { token } = req.headers;
     const { title, author, image, comment } = req.body;
     const decoded_data = jwt.verify(token, "secret_key");
 
