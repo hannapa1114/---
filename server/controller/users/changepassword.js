@@ -5,6 +5,7 @@ const crypto = require("crypto");
 module.exports = {
   post: (req, res) => {
     const { token } = req.headers;
+	  console.log(token)
     const decoded_data = jwt.verify(token, "secret_key");
     let { password } = req.body;
    
